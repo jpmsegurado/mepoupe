@@ -23,11 +23,17 @@ const routes = [
     path: '/envelopes',
     name: 'envelopes',
     component: () => import('../views/Envelopes')
+  },
+  {
+    path: '/configs',
+    name: 'configs',
+    component: () => import('../views/Configuration')
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 export default router

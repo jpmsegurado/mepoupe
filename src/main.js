@@ -17,13 +17,20 @@ Vue.use(money, {
   thousands: '.',
   prefix: 'R$ ',
   suffix: '',
-  precision: 2,
-  masked: false
+  precision: 2
 })
 
 Vue.component(FormItem.name, FormItem)
+
 Vue.prototype.$formatMoney = (money) => {
   return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(money)
+}
+
+Vue.prototype.$currencyToNumber = (currency) => {
+  const removedSymbol = currency.replace('R$ ', '')
+  const removedCommas = removedSymbol.split('.').join('')
+  const removeDotForComma = removedCommas.replace(',', '.')
+  return parseFloat(removeDotForComma)
 }
 
 Vue.config.productionTip = false

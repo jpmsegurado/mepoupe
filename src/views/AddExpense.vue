@@ -1,6 +1,6 @@
 <template>
   <card-page title="Novo Gasto Fixo" class="add-expense">
-    <form class="add-expense__form">
+    <form :model="form" class="add-expense__form" @submit="submit">
       <form-item>
         <label>Descrição</label>
         <el-input v-model="form.description" />
@@ -11,7 +11,7 @@
         <el-input v-model="form.value" v-money="{}" />
       </form-item>
 
-      <el-button class="add-expense__form__submit">
+      <el-button class="add-expense__form__submit" @click="submit">
         Adicionar
       </el-button>
       <el-button class="add-expense__form__cancel">
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import CardPage from '@/components/page/CardPage'
 
 export default {
@@ -32,6 +33,17 @@ export default {
   data () {
     return {
       form: {}
+    }
+  },
+  methods: {
+    ...mapActions({
+      addExpense: 'EXPENSES/ADD'
+    }),
+    submit () {
+      const form = { ...this.form }
+      form.value = this.$currencyToNumber(form.value)
+      this.addExpense(form)
+      this.form = {}
     }
   }
 }

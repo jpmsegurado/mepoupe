@@ -32,6 +32,6 @@ export default {
   getters: {
     ALL: state => state.items
   },
-  action: {},
+  actions: {},
   mutations: {}
 }

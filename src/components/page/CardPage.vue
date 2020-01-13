@@ -5,8 +5,10 @@
         <h2 class="card-page__title">
           {{ title }}
         </h2>
+        <p v-if="subtitle" class="card-page__subtitle">
+          {{ subtitle }}
+        </p>
       </template>
-
       <slot />
     </el-card>
   </div>
@@ -20,6 +22,11 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    subtitle: {
+      type: String,
+      required: false,
+      default: null
     }
   }
 }
@@ -36,6 +43,13 @@ export default {
   &__title {
     margin: 0;
     font-size: 20px;
+  }
+
+  &__subtitle {
+    color: $gray-text;
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 23px;
   }
 
 }

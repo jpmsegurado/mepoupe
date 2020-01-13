@@ -35,14 +35,14 @@ export default {
           to: '/incomes'
         },
         {
-          iconClass: 'el-icon-money',
-          label: 'Rendas Extra',
-          to: '/extra-incomes'
-        },
-        {
           iconClass: 'el-icon-message',
           label: 'Envelopes',
           to: '/envelopes'
+        },
+        {
+          iconClass: 'el-icon-setting',
+          label: 'Configurações',
+          to: '/configs'
         }
       ]
     }
