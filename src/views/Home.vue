@@ -24,7 +24,7 @@ export default {
       configs: 'CONFIGURATION/ALL'
     }),
     totalToInvest () {
-      return this.totalIncomes * 0.3
+      return this.totalIncomes * this.configs.retirement
     },
     fun () {
       const rest = this.totalIncomes - this.totalExpenses
@@ -32,10 +32,10 @@ export default {
       return value > 0 ? value : 0
     },
     education () {
-      return this.totalIncomes * 0.05
+      return this.totalIncomes * this.configs.education
     },
     installments () {
-      return this.totalIncomes * 0.1
+      return this.totalIncomes * this.configs.installments
     }
   }
 }

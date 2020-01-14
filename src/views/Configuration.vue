@@ -9,18 +9,12 @@
         <label>Aposentadoria</label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="10">
-            <el-input v-model="form.retirement.percentage" v-money="percentageMask" />
-          </el-col>
-
-          <el-col class="text-center" :span="2">
-            ou
-          </el-col>
-
-          <el-col :span="10">
-            <el-input
-              v-model="form.retirement.value"
-              v-money="{}"
-              @blur="clearPercentage('retirement')"
+            <el-slider
+              v-model="form.retirement"
+              :format-tooltip="formatTooltip"
+              :min="0"
+              :step="1"
+              :max="30"
             />
           </el-col>
         </el-row>
@@ -30,18 +24,12 @@
         <label>Educação</label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="10">
-            <el-input v-model="form.education.percentage" v-money="percentageMask" />
-          </el-col>
-
-          <el-col class="text-center" :span="2">
-            ou
-          </el-col>
-
-          <el-col :span="10">
-            <el-input
-              v-model="form.education.value"
-              v-money="{}"
-              @blur="clearPercentage('education')"
+            <el-slider
+              v-model="form.education"
+              :format-tooltip="formatTooltip"
+              :min="0"
+              :step="1"
+              :max="5"
             />
           </el-col>
         </el-row>
@@ -51,18 +39,12 @@
         <label>Dívidas</label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="10">
-            <el-input v-model="form.installments.percentage" v-money="percentageMask" />
-          </el-col>
-
-          <el-col class="text-center" :span="2">
-            ou
-          </el-col>
-
-          <el-col :span="10">
-            <el-input
-              v-model="form.installments.value"
-              v-money="{}"
-              @blur="clearPercentage('installments')"
+            <el-slider
+              v-model="form.installments"
+              :format-tooltip="formatTooltip"
+              :min="0"
+              :step="1"
+              :max="10"
             />
           </el-col>
         </el-row>
@@ -80,7 +62,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import CardPage from '@/components/page/CardPage'
 
 export default {
@@ -92,24 +74,14 @@ export default {
     return {
       form: {
         education: {
-          percentage: 0,
-          value: 0
+          percentage: 0
         },
         installments: {
-          percentage: 0,
-          value: 0
+          percentage: 0
         },
         retirement: {
-          percentage: 0,
-          value: 0
+          percentage: 0
         }
-      },
-      percentageMask: {
-        decimal: '',
-        thousands: '',
-        prefix: '',
-        suffix: ' %',
-        precision: 0
       }
     }
   },
@@ -124,22 +96,26 @@ export default {
     this.loadAttributeFromStore('retirement')
   },
   methods: {
-    formatPercentageToInput (value) {
-      return `${value * 100} %`
-    },
+    ...mapActions({
+      updateConfiguration: 'CONFIGURATION/UPDATE'
+    }),
     loadAttributeFromStore (attribute) {
-      const isPercentage = this.configs[attribute].isPercentage
-      if (isPercentage) {
-        this.$set(this.form[attribute], 'percentage', this.formatPercentageToInput(this.configs[attribute].value))
-      } else {
-        this.$set(this.form[attribute], 'value', this.configs[attribute].value)
-      }
+      this.form[attribute] = this.configs[attribute] * 100
     },
-    clearPercentage (attribute) {
-      this.$set(this.form[attribute], 'percentage', '0 %')
+    formatTooltip (val) {
+      return `${val} %`
+    },
+    buildObjectToStore (atribute) {
+      return this.form[atribute] / 100
     },
     submit () {
+      const configs = {
+        education: this.buildObjectToStore('education'),
+        installments: this.buildObjectToStore('installments'),
+        retirement: this.buildObjectToStore('retirement')
+      }
 
+      this.updateConfiguration(configs)
     }
   }
 }
