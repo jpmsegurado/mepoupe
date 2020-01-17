@@ -1,6 +1,6 @@
 <template>
   <card-page title="Novo Gasto Fixo" class="add-expense">
-    <form :model="form" class="add-expense__form" @submit="submit">
+    <el-form :model="form" class="add-expense__form" @submit="submit">
       <form-item>
         <label>Descrição</label>
         <el-input v-model="form.description" />
@@ -17,7 +17,7 @@
       <el-button class="add-expense__form__cancel">
         Cancelar
       </el-button>
-    </form>
+    </el-form>
   </card-page>
 </template>
 
@@ -52,7 +52,6 @@ export default {
 <style lang="scss" scoped>
 .add-expense {
   &__form {
-
     &__submit {
       background-color: $primary;
       color: $white;

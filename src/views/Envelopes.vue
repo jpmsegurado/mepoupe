@@ -1,5 +1,11 @@
 <template>
-  <page class="envelopes" title="Envelopes" subtitle="Saiba quanto você tem disponível para esse mês">
+  <page
+    class="envelopes"
+    title="Envelopes"
+    subtitle="Saiba quanto você tem disponível para esse mês"
+    action-text="Adicionar envelope"
+    @actionClick="openAddEnvelopePage"
+  >
     <el-row :gutter="24">
       <el-col v-for="envelope in items" :key="envelope.label" :sm="24" :md="12" :lg="8">
         <el-card class="envelopes__card">
@@ -38,6 +44,11 @@ export default {
     ...mapGetters({
       items: 'ENVELOPES/ALL'
     })
+  },
+  methods: {
+    openAddEnvelopePage () {
+      this.$router.push({ name: 'add-envelope' })
+    }
   }
 }
 </script>

@@ -25,6 +25,11 @@ const routes = [
     component: () => import('../views/Envelopes')
   },
   {
+    path: '/add-envelope',
+    name: 'add-envelope',
+    component: () => import('../views/AddEnvelope')
+  },
+  {
     path: '/configs',
     name: 'configs',
     component: () => import('../views/Configuration')
