@@ -3,10 +3,10 @@
     class="add-envelope"
     title="Adicionar Envelope"
   >
-    <el-form class="add-envelope__form">
+    <el-form class="add-envelope__form" @submit="submit">
       <form-item>
         <label>Descrição</label>
-        <el-input v-model="form.description" />
+        <el-input v-model="form.label" />
       </form-item>
 
       <form-item>
@@ -14,7 +14,7 @@
         <el-input v-model="form.budget" v-money="{}" />
       </form-item>
 
-      <el-button class="add-envelope__form__submit">
+      <el-button class="add-envelope__form__submit" type="submit" @click="submit">
         Adicionar
       </el-button>
       <el-button class="add-envelope__form__cancel">
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import CardPage from '@/components/page/CardPage'
 
 export default {
@@ -34,7 +35,20 @@ export default {
   },
   data () {
     return {
-      form: {}
+      form: {
+        category: 'custom'
+      }
+    }
+  },
+  methods: {
+    ...mapActions({
+      addEnvelope: 'ENVELOPES/ADD'
+    }),
+    submit () {
+      const form = { ...this.form }
+      form.budget = this.$currencyToNumber(form.budget)
+      console.log(form)
+      this.addEnvelope(form)
     }
   }
 }

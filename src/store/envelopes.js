@@ -5,33 +5,42 @@ export default {
       {
         label: 'Lazer',
         category: 'fun',
-        value: 120
+        budget: 120
       },
       {
         label: 'Alimentação',
         category: 'food',
-        value: 240
+        budget: 240
       },
       {
         label: 'Educação',
         category: 'education',
-        value: 100
+        budget: 100
       },
       {
         label: 'Parcelas',
         category: 'installment',
-        value: 100
+        budget: 100
       },
       {
         label: 'Não se meta',
         category: 'dont-mess-with',
-        value: 100
+        budget: 100
       }
     ]
   },
   getters: {
     ALL: state => state.items
   },
-  actions: {},
-  mutations: {}
+  actions: {
+    ADD ({ commit }, envelope) {
+      if (envelope.category !== 'custom') { return { error: 'operation not allowed' } }
+      commit('ADD', envelope)
+    }
+  },
+  mutations: {
+    ADD (state, envelope) {
+      state.items.push(envelope)
+    }
+  }
 }

@@ -23,7 +23,7 @@
             </el-dropdown>
           </div>
           <div class="envelopes__card__value">
-            {{ $formatMoney(envelope.value) }}
+            {{ $formatMoney(envelope.budget) }}
           </div>
         </el-card>
       </el-col>
