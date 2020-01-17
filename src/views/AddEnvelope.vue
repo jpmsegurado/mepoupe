@@ -47,8 +47,8 @@ export default {
     submit () {
       const form = { ...this.form }
       form.budget = this.$currencyToNumber(form.budget)
-      console.log(form)
       this.addEnvelope(form)
+      this.$router.push({ name: 'envelopes' })
     }
   }
 }

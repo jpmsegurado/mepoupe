@@ -12,11 +12,20 @@
           <div slot="header" class="envelopes__card__header">
             <strong>{{ envelope.label }}</strong>
 
-            <el-dropdown class="envelopes__card__header__actions" placement="bottom">
+            <el-dropdown
+              class="envelopes__card__header__actions"
+              placement="bottom"
+              @command="(command) => handleCommand(command, envelope)"
+            >
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
+                <el-dropdown-item :command="commands.addExpense">
                   <i class="el-icon-plus" />
                   <span>Adicionar Gasto</span>
+                </el-dropdown-item>
+
+                <el-dropdown-item :command="commands.remove">
+                  <i class="el-icon-delete" />
+                  <span>Deletar</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
               <el-button type="text" icon="el-icon-more" />
@@ -32,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import Page from '@/components/page/Page'
 
 export default {
@@ -40,14 +49,36 @@ export default {
   components: {
     Page
   },
+  data () {
+    return {
+      commands: {
+        remove: 'remove',
+        addExpense: 'addExpense'
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       items: 'ENVELOPES/ALL'
     })
   },
   methods: {
+    ...mapActions({
+      remove: 'ENVELOPES/REMOVE'
+    }),
     openAddEnvelopePage () {
       this.$router.push({ name: 'add-envelope' })
+    },
+    openAddExpensePage () {
+      this.$router.push({ name: 'add-expense' })
+    },
+    handleCommand (command, envelope) {
+      const actions = {
+        [this.commands.remove]: () => this.remove(envelope),
+        [this.commands.addExpense]: () => this.openAddExpensePage(envelope)
+      }
+
+      return actions[command]()
     }
   }
 }

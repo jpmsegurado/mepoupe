@@ -1,46 +1,27 @@
 export default {
   namespaced: true,
   state: {
-    items: [
-      {
-        label: 'Lazer',
-        category: 'fun',
-        budget: 120
-      },
-      {
-        label: 'Alimentação',
-        category: 'food',
-        budget: 240
-      },
-      {
-        label: 'Educação',
-        category: 'education',
-        budget: 100
-      },
-      {
-        label: 'Parcelas',
-        category: 'installment',
-        budget: 100
-      },
-      {
-        label: 'Não se meta',
-        category: 'dont-mess-with',
-        budget: 100
-      }
-    ]
+    items: []
   },
   getters: {
     ALL: state => state.items
   },
   actions: {
     ADD ({ commit }, envelope) {
-      if (envelope.category !== 'custom') { return { error: 'operation not allowed' } }
       commit('ADD', envelope)
+    },
+    REMOVE ({ commit }, envelope) {
+      if (envelope.category !== 'custom') { return { error: 'operation not allowed' } }
+      commit('REMOVE', envelope)
     }
   },
   mutations: {
     ADD (state, envelope) {
       state.items.push(envelope)
+    },
+    REMOVE (state, envelope) {
+      const index = state.items.findIndex(item => envelope.label === item.label)
+      state.items.splice(index, 1)
     }
   }
 }

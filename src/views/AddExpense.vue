@@ -44,6 +44,7 @@ export default {
       form.value = this.$currencyToNumber(form.value)
       this.addExpense(form)
       this.form = {}
+      this.$router.push({ name: 'expenses' })
     }
   }
 }
