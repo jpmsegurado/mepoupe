@@ -26,7 +26,7 @@ export default {
       return state.items.map((envelope) => {
         const expenses = findExpensesFromEnvelope(state.expenses, envelope)
           .map(expense => expense.value)
-        const expensesSum = expenses.reduce((sum, expense) => sum + expense)
+        const expensesSum = expenses.length === 0 ? 0 : expenses.reduce((sum, expense) => sum + expense)
         return {
           ...envelope,
           available: envelope.budget - expensesSum
@@ -56,6 +56,9 @@ export default {
     },
     ADD_EXPENSE ({ commit }, expense) {
       commit('ADD_EXPENSE', expense)
+    },
+    REMOVE_EXPENSE ({ commit }, expense) {
+      commit('REMOVE_EXPENSE', expense)
     }
   },
   mutations: {
@@ -70,6 +73,11 @@ export default {
     },
     ADD_EXPENSE (state, expense) {
       state.expenses.push(expense)
+      localStorage.setItem('envelopes', JSON.stringify(state))
+    },
+    REMOVE_EXPENSE (state, expense) {
+      const index = state.expenses.findIndex(item => expense.description === item.description)
+      state.expenses.splice(index, 1)
       localStorage.setItem('envelopes', JSON.stringify(state))
     }
   }

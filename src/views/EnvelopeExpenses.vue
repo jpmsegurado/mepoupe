@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Page from '@/components/page/Page'
 
 export default {
@@ -58,8 +59,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      removeExpense: 'ENVELOPES/REMOVE_EXPENSE'
+    }),
     handleCommand (command, expense) {
+      const actions = {
+        [this.commands.remove]: () => this.removeExpense(expense)
+      }
 
+      return actions[command]()
     }
   }
 }
