@@ -23,6 +23,11 @@
                   <span>Adicionar Gasto</span>
                 </el-dropdown-item>
 
+                <el-dropdown-item :command="commands.list">
+                  <i class="el-icon-notebook-2" />
+                  <span>Listar Gastos</span>
+                </el-dropdown-item>
+
                 <el-dropdown-item :command="commands.remove">
                   <i class="el-icon-delete" />
                   <span>Deletar</span>
@@ -53,7 +58,8 @@ export default {
     return {
       commands: {
         remove: 'remove',
-        addExpense: 'addExpense'
+        addExpense: 'addExpense',
+        list: 'list'
       }
     }
   },
@@ -72,10 +78,14 @@ export default {
     openAddExpensePage (envelope) {
       this.$router.push({ name: 'add-envelope-expense', params: { slug: envelope.slug } })
     },
+    openEnvelopeExpensesPage (envelope) {
+      this.$router.push({ name: 'envelope-expenses', params: { slug: envelope.slug } })
+    },
     handleCommand (command, envelope) {
       const actions = {
         [this.commands.remove]: () => this.remove(envelope),
-        [this.commands.addExpense]: () => this.openAddExpensePage(envelope)
+        [this.commands.addExpense]: () => this.openAddExpensePage(envelope),
+        [this.commands.list]: () => this.openAddExpensePage(envelope)
       }
 
       return actions[command]()

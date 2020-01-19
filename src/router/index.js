@@ -22,6 +22,11 @@ const routes = [
   {
     path: '/incomes',
     name: 'incomes',
+    component: () => import('../views/Incomes')
+  },
+  {
+    path: '/add-income',
+    name: 'add-income',
     component: () => import('../views/AddIncome')
   },
   {
