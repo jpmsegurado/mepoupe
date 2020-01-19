@@ -6,21 +6,25 @@ const initialState = jsonString ? JSON.parse(jsonString) : {
   expenses: []
 }
 
+function findExpensesFromEnvelope (expenses, envelope) {
+  return expenses
+    .filter((expense) => {
+      const isFromEnvelope = expense.envelope === envelope.slug
+      const beginOfMonth = moment().startOf('month')
+      const endOfMonth = moment().endOf('month')
+      const expenseDate = moment(expense.date)
+      const isFromCurrentMonth = moment(expenseDate).isBetween(beginOfMonth, endOfMonth)
+      return isFromEnvelope && isFromCurrentMonth
+    })
+}
+
 export default {
   namespaced: true,
   state: initialState,
   getters: {
-    ALL: (state) => {
+    ALL_WITH_AVAILABLE_AMOUNT (state) {
       return state.items.map((envelope) => {
-        const expenses = state.expenses
-          .filter((expense) => {
-            const isFromEnvelope = expense.envelope === envelope.slug
-            const beginOfMonth = moment().startOf('month')
-            const endOfMonth = moment().endOf('month')
-            const expenseDate = moment(expense.date)
-            const isFromCurrentMonth = moment(expenseDate).isBetween(beginOfMonth, endOfMonth)
-            return isFromEnvelope && isFromCurrentMonth
-          })
+        const expenses = findExpensesFromEnvelope(state.expenses, envelope)
           .map(expense => expense.value)
         const expensesSum = expenses.reduce((sum, expense) => sum + expense)
         return {
@@ -28,6 +32,18 @@ export default {
           available: envelope.budget - expensesSum
         }
       })
+    },
+    ALL: state => state.items,
+    FIND: state => slug => state.items.find(envelope => envelope.slug === slug),
+    FIND_WITH_EXPENSES (state) {
+      return (slug) => {
+        const envelope = state.items.find(envelope => envelope.slug === slug)
+        const expenses = findExpensesFromEnvelope(state.expenses, envelope)
+        return {
+          ...envelope,
+          expenses
+        }
+      }
     }
   },
   actions: {
