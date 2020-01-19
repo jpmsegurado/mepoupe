@@ -12,6 +12,7 @@ import 'element-ui/lib/theme-chalk/fonts/element-icons.ttf'
 import 'element-ui/lib/theme-chalk/fonts/element-icons.woff'
 
 import FormItem from '@/components/form-item/FormItem'
+import './registerServiceWorker'
 
 locale.use(lang)
 
