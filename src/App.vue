@@ -71,6 +71,7 @@ export default {
     }
 
     &__menu-backdrop {
+      display: initial;
       position: fixed;
       top: 0;
       bottom: 0;

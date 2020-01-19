@@ -8,7 +8,7 @@
       <form-item>
         <label>Aposentadoria <strong>{{ form.retirement }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
-          <el-col :span="14">
+          <el-col :sm="24" :md="14">
             <el-slider
               v-model="form.retirement"
               :format-tooltip="formatTooltip"
@@ -23,7 +23,7 @@
       <form-item>
         <label>Educação <strong>{{ form.education }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
-          <el-col :span="14">
+          <el-col :sm="24" :md="14">
             <el-slider
               v-model="form.education"
               :format-tooltip="formatTooltip"
@@ -38,7 +38,7 @@
       <form-item>
         <label>Dívidas <strong>{{ form.installments }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
-          <el-col :span="14">
+          <el-col :sm="24" :md="14">
             <el-slider
               v-model="form.installments"
               :format-tooltip="formatTooltip"
@@ -53,7 +53,7 @@
       <form-item>
         <label>Não se meta <strong>{{ form.dontMess }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
-          <el-col :span="14">
+          <el-col :sm="24" :md="14">
             <el-slider
               v-model="form.dontMess"
               :format-tooltip="formatTooltip"
