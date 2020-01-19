@@ -25,6 +25,11 @@ export default {
     items () {
       return [
         {
+          iconClass: 'el-icon-house',
+          label: 'Página Inicial',
+          to: '/'
+        },
+        {
           iconClass: 'el-icon-data-line',
           label: 'Gastos Fixos',
           to: '/expenses'

@@ -11,6 +11,7 @@
   "dependencies": {
     "core-js": "^3.4.4",
     "element-ui": "^2.13.0",
+    "moment": "^2.24.0",
     "v-money": "^0.8.1",
     "vue": "^2.6.10",
     "vue-imask": "^6.0.1",

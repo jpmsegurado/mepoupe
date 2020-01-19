@@ -17,7 +17,7 @@
       <el-button class="add-envelope__form__submit" type="submit" @click="submit">
         Adicionar
       </el-button>
-      <el-button class="add-envelope__form__cancel">
+      <el-button class="add-envelope__form__cancel" @click="$router.push('/')">
         Cancelar
       </el-button>
     </el-form>
@@ -26,6 +26,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { generateSlug } from '@/utils'
 import CardPage from '@/components/page/CardPage'
 
 export default {
@@ -46,6 +47,7 @@ export default {
     }),
     submit () {
       const form = { ...this.form }
+      form.slug = generateSlug(form.label)
       form.budget = this.$currencyToNumber(form.budget)
       this.addEnvelope(form)
       this.$router.push({ name: 'envelopes' })
