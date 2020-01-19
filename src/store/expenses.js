@@ -30,13 +30,21 @@ export default {
     SUM: state => state.items.reduce((val, item) => val + item.value, 0)
   },
   actions: {
-    ADD ({ commit }, income) {
-      commit('ADD', income)
+    ADD ({ commit }, expense) {
+      commit('ADD', expense)
+    },
+    REMOVE ({ commit }, expense) {
+      commit('REMOVE', expense)
     }
   },
   mutations: {
-    ADD (state, income) {
-      state.items.push(income)
+    ADD (state, expense) {
+      state.items.push(expense)
+      localStorage.setItem('expenses', JSON.stringify(state))
+    },
+    REMOVE (state, expense) {
+      const index = state.items.findIndex(item => expense.label === item.label)
+      state.items.splice(index, index)
       localStorage.setItem('expenses', JSON.stringify(state))
     }
   }
