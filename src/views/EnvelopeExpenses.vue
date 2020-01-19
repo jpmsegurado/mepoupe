@@ -1,21 +1,19 @@
 <template>
   <page
-    class="incomes"
-    title="Receitas Fixos"
-    subtitle="Aqui você adiciona as suas receitas recorrentes"
-    action-text="Adicionar Receita"
-    @actionClick="$router.push({ name: 'add-income' })"
+    class="envelope-expenses"
+    :title="title"
+    subtitle="Aqui você vê com o que você andou gastando"
   >
     <el-row :gutter="24">
-      <el-col v-for="income in incomes" :key="income.label" :sm="24" :md="12" :lg="8">
-        <el-card class="incomes__card">
-          <div slot="header" class="incomes__card__header">
-            <strong>{{ income.label }}</strong>
+      <el-col v-for="expense in envelope.expenses" :key="expense.description" :sm="24" :md="12" :lg="8">
+        <el-card class="envelope-expenses__card">
+          <div slot="header" class="envelope-expenses__card__header">
+            <strong>{{ expense.description }}</strong>
 
             <el-dropdown
-              class="incomes__card__header__actions"
+              class="envelope-expenses__card__header__actions"
               placement="bottom"
-              @command="(command) => handleCommand(command, income)"
+              @command="(command) => handleCommand(command, expense)"
             >
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item :command="commands.remove">
@@ -26,8 +24,8 @@
               <el-button type="text" icon="el-icon-more" />
             </el-dropdown>
           </div>
-          <div class="incomes__card__value">
-            {{ $formatMoney(income.value) }}
+          <div class="envelope-expenses__card__value">
+            {{ $formatMoney(expense.value) }}
           </div>
         </el-card>
       </el-col>
@@ -36,11 +34,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
 import Page from '@/components/page/Page'
 
 export default {
-  name: 'Incomes',
+  name: 'EnvelopeExpenses',
   components: {
     Page
   },
@@ -52,26 +49,24 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      incomes: 'INCOMES/ALL'
-    })
+    envelope () {
+      const find = this.$store.getters['ENVELOPES/FIND_WITH_EXPENSES']
+      return find(this.$route.params.slug)
+    },
+    title () {
+      return `Gastos de ${this.envelope.label}`
+    }
   },
   methods: {
-    ...mapActions({
-      removeincome: 'INCOMES/REMOVE'
-    }),
-    handleCommand (command, income) {
-      const actions = {
-        [this.commands.remove]: () => this.removeincome(income)
-      }
-      return actions[command]()
+    handleCommand (command, expense) {
+
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.incomes {
+.envelope-expenses {
   &__card {
     margin-bottom: 20px;
 

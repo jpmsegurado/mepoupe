@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      items: 'ENVELOPES/ALL'
+      items: 'ENVELOPES/ALL_WITH_AVAILABLE_AMOUNT'
     })
   },
   methods: {
@@ -85,7 +85,7 @@ export default {
       const actions = {
         [this.commands.remove]: () => this.remove(envelope),
         [this.commands.addExpense]: () => this.openAddExpensePage(envelope),
-        [this.commands.list]: () => this.openAddExpensePage(envelope)
+        [this.commands.list]: () => this.openEnvelopeExpensesPage(envelope)
       }
 
       return actions[command]()

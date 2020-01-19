@@ -40,6 +40,7 @@ import { mapGetters, mapActions } from 'vuex'
 import Page from '@/components/page/Page'
 
 export default {
+  name: 'Expenses',
   components: {
     Page
   },

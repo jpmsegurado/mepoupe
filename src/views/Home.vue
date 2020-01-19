@@ -20,6 +20,7 @@ import { mapGetters } from 'vuex'
 import Page from '@/components/page/Page'
 
 export default {
+  name: 'Home',
   components: {
     Page
   },

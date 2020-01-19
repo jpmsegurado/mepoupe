@@ -44,6 +44,7 @@ import { mapGetters, mapActions } from 'vuex'
 import CardPage from '@/components/page/CardPage'
 
 export default {
+  name: 'AddEnvelopeExpense',
   components: {
     CardPage
   },
