@@ -9,20 +9,28 @@ const configs = json ? JSON.parse(json) : {
 export default {
   namespaced: true,
   state: {
-    configs
+    configs,
+    showMenu: false
   },
   getters: {
-    ALL: state => state.configs
+    ALL: state => state.configs,
+    SHOW_MENU: state => state.showMenu
   },
   actions: {
     UPDATE ({ commit }, configs) {
       commit('UPDATE', configs)
+    },
+    TOGGLE_MENU ({ commit }) {
+      commit('TOGGLE_MENU')
     }
   },
   mutations: {
     UPDATE (state, configs) {
       state.configs = configs
       localStorage.setItem('configuration', JSON.stringify(configs))
+    },
+    TOGGLE_MENU (state) {
+      state.showMenu = !state.showMenu
     }
   }
 }

@@ -8,7 +8,7 @@
 
     <el-menu class="menu__list">
       <router-link v-for="item in items" :key="item.label" :to="item.to">
-        <el-menu-item :class="{ active: isActiveRoute(item.to) }">
+        <el-menu-item :class="{ active: isActiveRoute(item.to) }" @click="toggleMenu">
           <i :class="item.iconClass" />
           <span>{{ item.label }}</span>
         </el-menu-item>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Menu',
@@ -53,6 +54,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      toggleMenu: 'CONFIGURATION/TOGGLE_MENU'
+    }),
     isActiveRoute (to) {
       return this.$route.path === to
     }
