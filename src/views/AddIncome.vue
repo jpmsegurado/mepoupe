@@ -14,7 +14,7 @@
       <el-button class="add-income__form__submit" type="submit" @click="submit">
         Adicionar
       </el-button>
-      <el-button class="add-income__form__cancel">
+      <el-button class="add-income__form__cancel" @click="$router.push('/')">
         Cancelar
       </el-button>
     </el-form>
@@ -43,6 +43,7 @@ export default {
       const form = { ...this.form }
       form.value = this.$currencyToNumber(form.value)
       this.addIncome(form)
+      this.$router.push('/')
     }
   }
 }

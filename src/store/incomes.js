@@ -1,12 +1,13 @@
-// const incomes = JSON.parse(localStorage.getItem('incomes'))
+const jsonString = localStorage.getItem('incomes')
+const initialState = jsonString ? JSON.parse(jsonString) : {
+  items: [
+    { label: 'Salário', value: 6750 }
+  ]
+}
 
 export default {
   namespaced: true,
-  state: {
-    items: [
-      { label: 'Salário', value: 6750 }
-    ]
-  },
+  state: initialState,
   getters: {
     ALL: state => state.items,
     SUM: state => state.items.reduce((val, item) => val + item.value, 0)
@@ -19,7 +20,7 @@ export default {
   mutations: {
     ADD (state, income) {
       state.items.push(income)
-      localStorage.setItem('incomes', JSON.stringify(state.items))
+      localStorage.setItem('incomes', JSON.stringify(state))
     }
   }
 }

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import money from 'v-money'
+import locale from 'element-ui/lib/locale'
+import lang from 'element-ui/lib/locale/lang/pt-br'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -10,6 +12,8 @@ import 'element-ui/lib/theme-chalk/fonts/element-icons.ttf'
 import 'element-ui/lib/theme-chalk/fonts/element-icons.woff'
 
 import FormItem from '@/components/form-item/FormItem'
+
+locale.use(lang)
 
 Vue.use(ElementUI)
 Vue.use(money, {

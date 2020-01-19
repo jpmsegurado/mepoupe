@@ -32,7 +32,7 @@
             </el-dropdown>
           </div>
           <div class="envelopes__card__value">
-            {{ $formatMoney(envelope.budget) }}
+            {{ $formatMoney(envelope.available) }}
           </div>
         </el-card>
       </el-col>
@@ -69,8 +69,8 @@ export default {
     openAddEnvelopePage () {
       this.$router.push({ name: 'add-envelope' })
     },
-    openAddExpensePage () {
-      this.$router.push({ name: 'add-expense' })
+    openAddExpensePage (envelope) {
+      this.$router.push({ name: 'add-envelope-expense', params: { slug: envelope.slug } })
     },
     handleCommand (command, envelope) {
       const actions = {

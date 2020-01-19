@@ -14,7 +14,7 @@
       <el-button class="add-expense__form__submit" @click="submit">
         Adicionar
       </el-button>
-      <el-button class="add-expense__form__cancel">
+      <el-button class="add-expense__form__cancel" @click="$router.push('/')">
         Cancelar
       </el-button>
     </el-form>
@@ -44,7 +44,7 @@ export default {
       form.value = this.$currencyToNumber(form.value)
       this.addExpense(form)
       this.form = {}
-      this.$router.push({ name: 'expenses' })
+      this.$router.push({ name: 'home' })
     }
   }
 }

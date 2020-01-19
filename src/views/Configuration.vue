@@ -6,7 +6,7 @@
   >
     <el-form class="configs__form">
       <form-item>
-        <label>Aposentadoria</label>
+        <label>Aposentadoria <strong>{{ form.retirement }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="14">
             <el-slider
@@ -21,7 +21,7 @@
       </form-item>
 
       <form-item>
-        <label>Educação</label>
+        <label>Educação <strong>{{ form.education }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="14">
             <el-slider
@@ -36,7 +36,7 @@
       </form-item>
 
       <form-item>
-        <label>Dívidas</label>
+        <label>Dívidas <strong>{{ form.installments }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="14">
             <el-slider
@@ -51,7 +51,7 @@
       </form-item>
 
       <form-item>
-        <label>Não se meta</label>
+        <label>Não se meta <strong>{{ form.dontMess }} %</strong></label>
         <el-row class="configs__form__field-row" :gutter="24">
           <el-col :span="14">
             <el-slider
@@ -69,7 +69,7 @@
         Salvar
       </el-button>
 
-      <el-button class="configs__form__cancel">
+      <el-button class="configs__form__cancel" @click="$router.push('/')">
         Cancelar
       </el-button>
     </el-form>
@@ -128,6 +128,7 @@ export default {
       }
 
       this.updateConfiguration(configs)
+      this.$router.push('/')
     }
   }
 }
