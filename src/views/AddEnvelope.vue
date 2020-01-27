@@ -11,7 +11,7 @@
 
       <form-item>
         <label>Orçamento mensal</label>
-        <el-input v-model="form.budget" v-money="{}" />
+        <el-input v-model="form.budget" v-money="{}" type="tel" />
       </form-item>
 
       <el-button class="add-envelope__form__submit" type="submit" @click="submit">

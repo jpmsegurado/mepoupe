@@ -1,8 +1,6 @@
 const jsonString = localStorage.getItem('incomes')
 const initialState = jsonString ? JSON.parse(jsonString) : {
-  items: [
-    { label: 'Salário', value: 6750 }
-  ]
+  items: []
 }
 
 export default {

@@ -8,7 +8,7 @@
 
       <form-item>
         <label>Valor</label>
-        <el-input v-model="form.value" v-money="{}" />
+        <el-input v-model="form.value" v-money="{}" type="tel" />
       </form-item>
 
       <form-item>

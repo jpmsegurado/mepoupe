@@ -8,7 +8,7 @@
 
       <form-item>
         <label>Valor</label>
-        <el-input v-model="form.value" v-money="{}" />
+        <el-input v-model="form.value" v-money="{}" type="tel" />
       </form-item>
 
       <el-button class="add-income__form__submit" type="submit" @click="submit">
